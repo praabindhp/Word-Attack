@@ -24,21 +24,26 @@ const WordAttack = () => {
     const [successAlert, setSuccessAlert] = useState(false);
 
     const operationDescriptions = {
-        '1': 'Converts the input to upper case.',
-        '2': 'Converts the input to lower case.',
-        '3': 'Capitalizes the first letter of each word in the input.',
-        '4': 'Gets the character at the specified index.',
-        '5': 'Gets the substring from the start index to the end index.',
-        '6': 'Slices the input from the start index to the end index.',
-        '7': 'Trims whitespace from both ends of the input.',
-        '8': 'Splits the input by the specified separator and joins with commas.',
-        '9': 'Replaces the search value with the replace value in the input.',
-        '10': 'Checks if the input includes the search value.',
-        '11': 'Finds the index of the search value in the input.',
-        '12': 'Finds the last index of the search value in the input.',
-        '13': 'Repeats the input the specified number of times.',
-        '14': 'Checks if the input starts with the search value.',
-        '15': 'Checks if the input ends with the search value.',
+        '1': 'Converts The Input To Upper Case',
+        '2': 'Converts The Input To Lower Case',
+        '3': 'Capitalizes The First Letter Of Each Word In The Input',
+        '4': 'Gets The Character At The Specified Index',
+        '5': 'Gets The Substring From The Start Index To The End Index',
+        '6': 'Slices The Input From The Start Index To The End Index',
+        '7': 'Trims Whitespace From Both Ends Of The Input',
+        '8': 'Splits The Input By The Specified Separator And Joins With Commas',
+        '9': 'Replaces The Search Value With The Replace Value In The Input',
+        '10': 'Checks If The Input Includes The Search Value',
+        '11': 'Finds The Index Of The Search Value In The Input',
+        '12': 'Finds The Last Index Of The Search Value In The Input',
+        '13': 'Repeats The Input The Specified Number Of Times',
+        '14': 'Checks If The Input Starts With The Search Value',
+        '15': 'Checks If The Input Ends With The Search Value',
+        '16': 'Reverses The Input You Have Entered',
+        '17': 'Counts The Number Of Characters In The Input',
+        '18': 'Counts The Number Of Words In The Input',
+        '19': 'Removes Vowels From The Input',
+        '20': 'Randomizes The Characters In The Input',
     };
 
     const handleGenerate = () => {
@@ -51,7 +56,7 @@ const WordAttack = () => {
                 result = input.toLowerCase();
                 break;
             case '3':
-                result = input.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                result = input.charAt(0).toUpperCase() + input.slice(1);
                 break;
             case '4':
                 result = input.charAt(Number(charIndex));
@@ -88,6 +93,21 @@ const WordAttack = () => {
                 break;
             case '15':
                 result = input.endsWith(searchValue).toString();
+                break;
+            case '16':
+                result = input.split('').reverse().join('');
+                break;
+            case '17':
+                result = input.length.toString();
+                break;
+            case '18':
+                result = input.trim().split(/\s+/).length.toString();
+                break;
+            case '19':
+                result = input.replace(/[aeiouAEIOU]/g, '');
+                break;
+            case '20':
+                result = input.split('').sort(() => Math.random() - 0.5).join('');
                 break;
             default:
                 result = input;
@@ -154,6 +174,11 @@ const WordAttack = () => {
                 <MenuItem value="13">Repeat ( Count )</MenuItem>
                 <MenuItem value="14">Starts With ( Search String )</MenuItem>
                 <MenuItem value="15">Ends With ( Search String )</MenuItem>
+                <MenuItem value="16">Reverse String</MenuItem>
+                <MenuItem value="17">Count Characters</MenuItem>
+                <MenuItem value="18">Count Words</MenuItem>
+                <MenuItem value="19">Remove Vowels</MenuItem>
+                <MenuItem value="20">Randomize Characters</MenuItem>
             </TextField>
 
             {description && (
