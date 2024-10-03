@@ -4,10 +4,12 @@ import {
     TextField,
     MenuItem,
     Button,
-    Typography,
     Snackbar,
     Alert,
+    Typography,
 } from '@mui/material';
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import AssistantIcon from '@mui/icons-material/Assistant';
 
 const WordAttack = () => {
     const [input, setInput] = useState('');
@@ -128,10 +130,9 @@ const WordAttack = () => {
 
     return (
         <Container maxWidth="sm" sx={{ textAlign: 'center', mt: 5 }}>
-            <Typography variant="h4" gutterBottom>
+            <Typography variant="h4" component="div" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 2 }}>
                 Word Smith
             </Typography>
-            <br />
             <TextField
                 label="Enter Your Input Here"
                 multiline
@@ -190,8 +191,12 @@ const WordAttack = () => {
                         color: 'black',
                         borderRadius: 1,
                         textAlign: 'center',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
                     }}
                 >
+                    <AssistantIcon sx={{ mr: 1 }} />
                     {description}
                 </Typography>
             )}
@@ -268,7 +273,7 @@ const WordAttack = () => {
                 />
             )}
 
-            <Button variant="contained" onClick={handleGenerate} sx={{ mt: 2, mb: 2 }}>
+            <Button variant="contained" onClick={handleGenerate} sx={{ mt: 2, mb: 2 }} startIcon={<AutoAwesomeIcon />}>
                 Generate
             </Button>
 
