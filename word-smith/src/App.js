@@ -1,8 +1,8 @@
 import React from 'react';
-import WordAttack from './wordSmith';
+import WordSmith from './wordSmith';
 
 function App() {
-  return <WordAttack />;
+  return <WordSmith />;
 }
 
 export default App;

@@ -15,7 +15,6 @@ import CryptoJS from 'crypto-js';
 
 const WordAttack = () => {
     const [input, setInput] = useState('');
-    const [group, setGroup] = useState('');
     const [operation, setOperation] = useState('');
     const [output, setOutput] = useState('');
     const [charIndex, setCharIndex] = useState('');
@@ -74,12 +73,6 @@ const WordAttack = () => {
         '43': 'Converts The Input From Unicode',
         '44': 'Converts The Input To Caesar Cipher (Shift By 3)',
         '45': 'Converts The Input To Pig Latin',
-    };
-
-    const operationGroups = {
-        'Case Conversions': ['1', '2', '3', '21', '24', '25', '26', '27', '28', '29', '30'],
-        'Character Operations': ['4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '22', '23'],
-        'Encoding/Decoding': ['31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45'],
     };
 
     const handleGenerate = () => {
@@ -232,13 +225,6 @@ const WordAttack = () => {
         }
     };
 
-    const handleGroupChange = (e) => {
-        const selectedGroup = e.target.value;
-        setGroup(selectedGroup);
-        setOperation('');
-        setDescription('');
-    };
-
     const handleOperationChange = (e) => {
         const selectedOperation = e.target.value;
         setOperation(selectedOperation);
@@ -271,10 +257,10 @@ const WordAttack = () => {
 
             <TextField
                 select
-                label="Select Group"
+                label="Select Operation"
                 fullWidth
-                value={group}
-                onChange={handleGroupChange}
+                value={operation}
+                onChange={handleOperationChange}
                 sx={{ mb: 2, fontFamily: 'Ubuntu, sans-serif' }}
                 SelectProps={{
                     MenuProps: {
@@ -288,38 +274,52 @@ const WordAttack = () => {
                 }}
                 InputProps={{ style: { fontFamily: 'Ubuntu, sans-serif' } }}
             >
-                <MenuItem value="Case Conversions" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Case Conversions</MenuItem>
-                <MenuItem value="Character Operations" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Character Operations</MenuItem>
-                <MenuItem value="Encoding/Decoding" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Encoding / Decoding</MenuItem>
+                <MenuItem value="1" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Upper Case</MenuItem>
+                <MenuItem value="2" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Lower Case</MenuItem>
+                <MenuItem value="3" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Capitalize First Letter</MenuItem>
+                <MenuItem value="4" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Character At Index</MenuItem>
+                <MenuItem value="5" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Substring ( Start, End )</MenuItem>
+                <MenuItem value="6" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Slice ( Start, End )</MenuItem>
+                <MenuItem value="7" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Trim</MenuItem>
+                <MenuItem value="8" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Split ( Separator )</MenuItem>
+                <MenuItem value="9" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Replace ( Search Value, New Value )</MenuItem>
+                <MenuItem value="10" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Includes Search String</MenuItem>
+                <MenuItem value="11" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Index Of ( Search Value )</MenuItem>
+                <MenuItem value="12" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Last Index Of ( Search Value )</MenuItem>
+                <MenuItem value="13" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Repeat ( Count )</MenuItem>
+                <MenuItem value="14" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Starts With ( Search String )</MenuItem>
+                <MenuItem value="15" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Ends With ( Search String )</MenuItem>
+                <MenuItem value="16" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Reverse String</MenuItem>
+                <MenuItem value="17" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Count Characters</MenuItem>
+                <MenuItem value="18" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Count Words</MenuItem>
+                <MenuItem value="19" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Remove Vowels</MenuItem>
+                <MenuItem value="20" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Randomize Characters</MenuItem>
+                <MenuItem value="21" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Title Case</MenuItem>
+                <MenuItem value="22" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Remove Digits</MenuItem>
+                <MenuItem value="23" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Replace Spaces With Hyphens</MenuItem>
+                <MenuItem value="24" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Camel Case</MenuItem>
+                <MenuItem value="25" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Snake Case</MenuItem>
+                <MenuItem value="26" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Kebab Case</MenuItem>
+                <MenuItem value="27" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Pascal Case</MenuItem>
+                <MenuItem value="28" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Dot Case</MenuItem>
+                <MenuItem value="29" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Path Case</MenuItem>
+                <MenuItem value="30" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Constant Case</MenuItem>
+                <MenuItem value="31" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Hexadecimal</MenuItem>
+                <MenuItem value="32" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Binary</MenuItem>
+                <MenuItem value="33" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Base64</MenuItem>
+                <MenuItem value="34" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To ROT13</MenuItem>
+                <MenuItem value="35" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To MD5 Hash</MenuItem>
+                <MenuItem value="36" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To SHA-1 Hash</MenuItem>
+                <MenuItem value="37" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To SHA-256 Hash</MenuItem>
+                <MenuItem value="38" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To URL Encoded</MenuItem>
+                <MenuItem value="39" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To URL Decoded</MenuItem>
+                <MenuItem value="40" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To HTML Entities</MenuItem>
+                <MenuItem value="41" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>From HTML Entities</MenuItem>
+                <MenuItem value="42" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Unicode</MenuItem>
+                <MenuItem value="43" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>From Unicode</MenuItem>
+                <MenuItem value="44" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Caesar Cipher (Shift by 3)</MenuItem>
+                <MenuItem value="45" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Pig Latin</MenuItem>
             </TextField>
-
-            {group && (
-                <TextField
-                    select
-                    label="Select Operation"
-                    fullWidth
-                    value={operation}
-                    onChange={handleOperationChange}
-                    sx={{ mb: 2, fontFamily: 'Ubuntu, sans-serif' }}
-                    SelectProps={{
-                        MenuProps: {
-                            PaperProps: {
-                                style: {
-                                    textAlign: 'center',
-                                    fontFamily: 'Ubuntu, sans-serif',
-                                },
-                            },
-                        },
-                    }}
-                    InputProps={{ style: { fontFamily: 'Ubuntu, sans-serif' } }}
-                >
-                    {operationGroups[group].map(op => (
-                        <MenuItem key={op} value={op} sx={{ fontFamily: 'Ubuntu, sans-serif' }}>
-                            {operationDescriptions[op]}
-                        </MenuItem>
-                    ))}
-                </TextField>
-            )}
 
             {description && (
                 <Typography
