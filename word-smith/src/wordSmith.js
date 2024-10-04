@@ -290,7 +290,7 @@ const WordAttack = () => {
             >
                 <MenuItem value="Case Conversions" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Case Conversions</MenuItem>
                 <MenuItem value="Character Operations" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Character Operations</MenuItem>
-                <MenuItem value="Encoding/Decoding" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Encoding / Decoding</MenuItem>
+                <MenuItem value="Encoding/Decoding" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Encoding/Decoding</MenuItem>
             </TextField>
 
             {group && (
