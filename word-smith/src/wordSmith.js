@@ -11,6 +11,7 @@ import {
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import AssistantIcon from '@mui/icons-material/Assistant';
 import WSLogo from './WS-Light.png';
+import CryptoJS from 'crypto-js';
 
 const WordAttack = () => {
     const [input, setInput] = useState('');
@@ -47,6 +48,31 @@ const WordAttack = () => {
         '18': 'Counts The Number Of Words In The Input',
         '19': 'Removes Vowels From The Input',
         '20': 'Randomizes The Characters In The Input',
+        '21': 'Converts The Input To Title Case',
+        '22': 'Removes All Digits From The Input',
+        '23': 'Replaces Spaces With Hyphens',
+        '24': 'Converts The Input To Camel Case',
+        '25': 'Converts The Input To Snake Case',
+        '26': 'Converts The Input To Kebab Case',
+        '27': 'Converts The Input To Pascal Case',
+        '28': 'Converts The Input To Dot Case',
+        '29': 'Converts The Input To Path Case',
+        '30': 'Converts The Input To Constant Case',
+        '31': 'Converts The Input To Hexadecimal',
+        '32': 'Converts The Input To Binary',
+        '33': 'Converts The Input To Base64',
+        '34': 'Converts The Input To ROT13',
+        '35': 'Converts The Input To MD5 Hash',
+        '36': 'Converts The Input To SHA-1 Hash',
+        '37': 'Converts The Input To SHA-256 Hash',
+        '38': 'Converts The Input To URL Encoded',
+        '39': 'Converts The Input To URL Decoded',
+        '40': 'Converts The Input To HTML Entities',
+        '41': 'Converts The Input From HTML Entities',
+        '42': 'Converts The Input To Unicode',
+        '43': 'Converts The Input From Unicode',
+        '44': 'Converts The Input To Caesar Cipher (Shift By 3)',
+        '45': 'Converts The Input To Pig Latin',
     };
 
     const handleGenerate = () => {
@@ -81,7 +107,6 @@ const WordAttack = () => {
                 break;
             case '10':
                 result = input.includes(searchValue).toString();
-                result = result.replace(/\b\w/g, char => char.toUpperCase())
                 break;
             case '11':
                 result = input.indexOf(searchValue).toString();
@@ -94,11 +119,9 @@ const WordAttack = () => {
                 break;
             case '14':
                 result = input.startsWith(searchValue).toString();
-                result = result.replace(/\b\w/g, char => char.toUpperCase())
                 break;
             case '15':
                 result = input.endsWith(searchValue).toString();
-                result = result.replace(/\b\w/g, char => char.toUpperCase())
                 break;
             case '16':
                 result = input.split('').reverse().join('');
@@ -114,6 +137,81 @@ const WordAttack = () => {
                 break;
             case '20':
                 result = input.split('').sort(() => Math.random() - 0.5).join('');
+                break;
+            case '21':
+                result = input.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+                break;
+            case '22':
+                result = input.replace(/\d/g, '');
+                break;
+            case '23':
+                result = input.replace(/\s+/g, '-');
+                break;
+            case '24':
+                result = input.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, (match, index) => index === 0 ? match.toLowerCase() : match.toUpperCase()).replace(/\s+/g, '');
+                break;
+            case '25':
+                result = input.replace(/\s+/g, '_').toLowerCase();
+                break;
+            case '26':
+                result = input.replace(/\s+/g, '-').toLowerCase();
+                break;
+            case '27':
+                result = input.replace(/(\w)(\w*)/g, (_, firstChar, rest) => firstChar.toUpperCase() + rest.toLowerCase()).replace(/\s+/g, '');
+                break;
+            case '28':
+                result = input.replace(/\s+/g, '.').toLowerCase();
+                break;
+            case '29':
+                result = input.replace(/\s+/g, '/').toLowerCase();
+                break;
+            case '30':
+                result = input.replace(/\s+/g, '_').toUpperCase();
+                break;
+            case '31':
+                result = input.split('').map(char => char.charCodeAt(0).toString(16)).join(' ');
+                break;
+            case '32':
+                result = input.split('').map(char => char.charCodeAt(0).toString(2).padStart(8, '0')).join(' ');
+                break;
+            case '33':
+                result = btoa(input);
+                break;
+            case '34':
+                result = input.replace(/[a-zA-Z]/g, char => String.fromCharCode((char <= 'Z' ? 90 : 122) >= (char = char.charCodeAt(0) + 13) ? char : char - 26));
+                break;
+            case '35':
+                result = CryptoJS.MD5(input).toString();
+                break;
+            case '36':
+                result = CryptoJS.SHA1(input).toString();
+                break;
+            case '37':
+                result = CryptoJS.SHA256(input).toString();
+                break;
+            case '38':
+                result = encodeURIComponent(input);
+                break;
+            case '39':
+                result = decodeURIComponent(input);
+                break;
+            case '40':
+                result = input.replace(/[\u00A0-\u9999<>&]/gim, char => '&#' + char.charCodeAt(0) + ';');
+                break;
+            case '41':
+                result = input.replace(/&#(\d+);/g, (match, num) => String.fromCharCode(num));
+                break;
+            case '42':
+                result = input.split('').map(char => '\\u' + char.charCodeAt(0).toString(16).padStart(4, '0')).join('');
+                break;
+            case '43':
+                result = input.replace(/\\u[\dA-F]{4}/gi, match => String.fromCharCode(parseInt(match.replace(/\\u/g, ''), 16)));
+                break;
+            case '44':
+                result = input.replace(/[a-zA-Z]/g, char => String.fromCharCode(char.charCodeAt(0) + 3));
+                break;
+            case '45':
+                result = input.replace(/\b(\w)(\w*)\b/g, '$2$1ay');
                 break;
             default:
                 result = input;
@@ -196,6 +294,31 @@ const WordAttack = () => {
                 <MenuItem value="18" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Count Words</MenuItem>
                 <MenuItem value="19" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Remove Vowels</MenuItem>
                 <MenuItem value="20" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Randomize Characters</MenuItem>
+                <MenuItem value="21" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Title Case</MenuItem>
+                <MenuItem value="22" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Remove Digits</MenuItem>
+                <MenuItem value="23" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>Replace Spaces With Hyphens</MenuItem>
+                <MenuItem value="24" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Camel Case</MenuItem>
+                <MenuItem value="25" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Snake Case</MenuItem>
+                <MenuItem value="26" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Kebab Case</MenuItem>
+                <MenuItem value="27" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Pascal Case</MenuItem>
+                <MenuItem value="28" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Dot Case</MenuItem>
+                <MenuItem value="29" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Path Case</MenuItem>
+                <MenuItem value="30" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Constant Case</MenuItem>
+                <MenuItem value="31" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Hexadecimal</MenuItem>
+                <MenuItem value="32" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Binary</MenuItem>
+                <MenuItem value="33" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Base64</MenuItem>
+                <MenuItem value="34" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To ROT13</MenuItem>
+                <MenuItem value="35" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To MD5 Hash</MenuItem>
+                <MenuItem value="36" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To SHA-1 Hash</MenuItem>
+                <MenuItem value="37" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To SHA-256 Hash</MenuItem>
+                <MenuItem value="38" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To URL Encoded</MenuItem>
+                <MenuItem value="39" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To URL Decoded</MenuItem>
+                <MenuItem value="40" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To HTML Entities</MenuItem>
+                <MenuItem value="41" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>From HTML Entities</MenuItem>
+                <MenuItem value="42" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Unicode</MenuItem>
+                <MenuItem value="43" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>From Unicode</MenuItem>
+                <MenuItem value="44" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Caesar Cipher (Shift by 3)</MenuItem>
+                <MenuItem value="45" sx={{ fontFamily: 'Ubuntu, sans-serif' }}>To Pig Latin</MenuItem>
             </TextField>
 
             {description && (
